@@ -43,6 +43,19 @@ The full write-up is available in report
 
 ---
 
+## 🧭 Methodology
+
+This engagement followed a standard black-box penetration testing methodology, moving through five phases:
+
+1. **Reconnaissance** — Gathered passive information about the target (WHOIS, DNS resolution, HTTP headers, robots.txt) before any active testing, to map the attack surface without alerting the target.
+2. **Enumeration** — Actively probed the target for hidden content and technology details using directory brute-forcing (gobuster) and CMS fingerprinting (WordPress confirmed via exposed `wp-admin`/`wp-login.php` paths).
+3. **Exploitation** — Manually tested the discovered login form for common web vulnerabilities, confirming both username enumeration (inconsistent error messages) and SQL injection (database error on malformed input), then used the injection flaw to bypass authentication.
+4. **Post-Exploitation / Data Analysis** — Extracted and cracked password-protected files retrieved after the bypass, then examined file metadata for further leads — a technique that surfaced a second, unrelated exposure (a misconfigured backup directory).
+5. **Reporting** — Documented every finding with reproducible steps, evidence, a risk rating per issue, and actionable remediation guidance for the client.
+
+This phase-by-phase approach mirrors how real-world penetration tests are structured, and reflects why thorough recon in Phase 1 (the `robots.txt` disclosure) ended up being directly relevant again much later in Phase 4.
+
+
 ## ⚠️ Risk & Impact Summary
 
 | # | Finding | Risk Level |
